@@ -66,17 +66,17 @@ cp $HOME/PF_RING/package/etc/ld.so.conf.d/pf_ring.conf $RPM_BUILD_ROOT/etc/ld.so
 @MYRICOM_LIB_COPY@
 # DAQ
 mkdir -p $RPM_BUILD_ROOT/usr/local/lib/daq
-cp $HOME/PF_RING/userland/snort/pfring-daq-module/daq_pfring.la $RPM_BUILD_ROOT/usr/local/lib/daq
-cp $HOME/PF_RING/userland/snort/pfring-daq-module/.libs/daq_pfring.so $RPM_BUILD_ROOT/usr/local/lib/daq
-cp $HOME/PF_RING/userland/snort/pfring-daq-module-zc/daq_pfring_zc.la $RPM_BUILD_ROOT/usr/local/lib/daq
-cp $HOME/PF_RING/userland/snort/pfring-daq-module-zc/.libs/daq_pfring_zc.so $RPM_BUILD_ROOT/usr/local/lib/daq
+#cp $HOME/PF_RING/userland/snort/pfring-daq-module/daq_pfring.la $RPM_BUILD_ROOT/usr/local/lib/daq
+#cp $HOME/PF_RING/userland/snort/pfring-daq-module/.libs/daq_pfring.so $RPM_BUILD_ROOT/usr/local/lib/daq
+#cp $HOME/PF_RING/userland/snort/pfring-daq-module-zc/daq_pfring_zc.la $RPM_BUILD_ROOT/usr/local/lib/daq
+#cp $HOME/PF_RING/userland/snort/pfring-daq-module-zc/.libs/daq_pfring_zc.so $RPM_BUILD_ROOT/usr/local/lib/daq
 cp -a $HOME/daq-2.?.?/sfbpf/.libs/libsfbpf.so.0 $HOME/daq-2.?.?/sfbpf/.libs/libsfbpf.so.0.0.1 $RPM_BUILD_ROOT/usr/local/lib
-%if %nozc == 0
-cp $HOME/PF_RING/userland/examples_zc/zbalance_ipc $RPM_BUILD_ROOT/usr/bin
-cp $HOME/PF_RING/userland/examples_zc/zsend $RPM_BUILD_ROOT/usr/bin
-cp $HOME/PF_RING/userland/examples_zc/zcount $RPM_BUILD_ROOT/usr/bin
-cp $HOME/PF_RING/userland/examples_zc/zcount_ipc $RPM_BUILD_ROOT/usr/bin
-%endif
+#%if %nozc == 0
+#cp $HOME/PF_RING/userland/examples_zc/zbalance_ipc $RPM_BUILD_ROOT/usr/bin
+#cp $HOME/PF_RING/userland/examples_zc/zsend $RPM_BUILD_ROOT/usr/bin
+#cp $HOME/PF_RING/userland/examples_zc/zcount $RPM_BUILD_ROOT/usr/bin
+#cp $HOME/PF_RING/userland/examples_zc/zcount_ipc $RPM_BUILD_ROOT/usr/bin
+#%endif
 
 
 # Clean out our build directory
@@ -92,19 +92,19 @@ rm -fr $RPM_BUILD_ROOT
 /usr/local/include/pfring.h
 /usr/local/include/pfring_zc.h
 /usr/local/include/nbpf.h
-/usr/local/lib/daq/daq_pfring.la
-/usr/local/lib/daq/daq_pfring.so
-/usr/local/lib/daq/daq_pfring_zc.la
-/usr/local/lib/daq/daq_pfring_zc.so
+#/usr/local/lib/daq/daq_pfring.la
+#/usr/local/lib/daq/daq_pfring.so
+#/usr/local/lib/daq/daq_pfring_zc.la
+#/usr/local/lib/daq/daq_pfring_zc.so
 /usr/local/lib/libsfbpf.so.0
 /usr/local/lib/libsfbpf.so.0.0.1
 /usr/lib64/wireshark/extcap
-%if %nozc == 0
-/usr/bin/zbalance_ipc
-/usr/bin/zsend
-/usr/bin/zcount
-/usr/bin/zcount_ipc
-%endif
+#%if %nozc == 0
+#/usr/bin/zbalance_ipc
+#/usr/bin/zsend
+#/usr/bin/zcount
+#/usr/bin/zcount_ipc
+#%endif
 #/usr/bin/tcpdump
 /usr/bin/pfcount
 /usr/bin/pfsend
