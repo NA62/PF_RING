@@ -8,7 +8,8 @@ URL: http://www.ntop.org/products/pf_ring/
 Packager: Luca Deri <deri@ntop.org>
 # Temporary location where the RPM will be built
 BuildRoot:  %{_tmppath}/%{name}-%{version}-root
-Requires: pfring-dkms = @VERS@, net-tools
+BuildRequires:	make git flex bison
+Requires:	flex bison net-tools
 # Disable shared libs dependency check (needed by FPGA libs)
 AutoReq: no
 # 
@@ -61,6 +62,9 @@ cp $HOME/PF_RING/package/etc/init.d/pf_ring    $RPM_BUILD_ROOT/etc/init.d
 cp $HOME/PF_RING/package/etc/init.d/cluster    $RPM_BUILD_ROOT/etc/init.d
 cp $HOME/PF_RING/package/etc/init/pf_ring.conf $RPM_BUILD_ROOT/etc/init
 cp $HOME/PF_RING/package/etc/ld.so.conf.d/pf_ring.conf $RPM_BUILD_ROOT/etc/ld.so.conf.d/
+
+cp $HOME/PF_RING/userland/libpcap/pcap-int.h $RPM_BUILD_ROOT/usr/local/include/
+
 @ACCOLADE_LIB_COPY@
 @NAPATECH_LIB_COPY@
 @MYRICOM_LIB_COPY@
@@ -115,6 +119,7 @@ rm -fr $RPM_BUILD_ROOT
 /etc/init.d/cluster
 /etc/init/pf_ring.conf
 /etc/ld.so.conf.d/pf_ring.conf
+/usr/local/include/pcap-int.h
 @ACCOLADE_LIBS@
 @NAPATECH_LIBS@
 @MYRICOM_LIBS@
