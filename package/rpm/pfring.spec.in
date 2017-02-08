@@ -46,7 +46,10 @@ cp $HOME/PF_RING/userland/lib/pfring.h         $RPM_BUILD_ROOT/usr/local/include
 cp $HOME/PF_RING/userland/lib/pfring_zc.h      $RPM_BUILD_ROOT/usr/local/include
 cp $HOME/PF_RING/userland/nbpf/nbpf.h  $RPM_BUILD_ROOT/usr/local/include
 cp $HOME/PF_RING/userland/libpcap/libpcap.a    $RPM_BUILD_ROOT/usr/local/lib
-cp $HOME/PF_RING/userland/libpcap/libpcap.so.1.7.4	$RPM_BUILD_ROOT/usr/local/lib
+#cp $HOME/PF_RING/userland/libpcap/libpcap.so.1.7.4	$RPM_BUILD_ROOT/usr/local/lib
+cp $HOME/PF_RING/userland/libpcap-1.7.4/libpcap.so.1.7.4 $RPM_BUILD_ROOT/usr/local/lib
+
+
 #
 # NOTE
 # Unless you install wireshark 2.x you cannot use the extcap plugin as CentOS
@@ -63,13 +66,28 @@ cp $HOME/PF_RING/package/etc/init.d/cluster    $RPM_BUILD_ROOT/etc/init.d
 cp $HOME/PF_RING/package/etc/init/pf_ring.conf $RPM_BUILD_ROOT/etc/init
 cp $HOME/PF_RING/package/etc/ld.so.conf.d/pf_ring.conf $RPM_BUILD_ROOT/etc/ld.so.conf.d/
 
+
 cp $HOME/PF_RING/userland/libpcap/pcap-int.h $RPM_BUILD_ROOT/usr/local/include/
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap-int.h $RPM_BUILD_ROOT/usr/local/include/
+
+mkdir -p $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/bluetooth.h $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/bpf.h       $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/ipnet.h     $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/namedb.h     $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/nflog.h     $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/pcap.h      $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/sll.h       $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/usb.h       $RPM_BUILD_ROOT/usr/local/include/pcap
+cp $HOME/PF_RING/userland/libpcap-1.7.4/pcap/vlan.h      $RPM_BUILD_ROOT/usr/local/include/pcap
+
+
 
 @ACCOLADE_LIB_COPY@
 @NAPATECH_LIB_COPY@
 @MYRICOM_LIB_COPY@
 # DAQ
-mkdir -p $RPM_BUILD_ROOT/usr/local/lib/daq
+#mkdir -p $RPM_BUILD_ROOT/usr/local/lib/daq
 #cp $HOME/PF_RING/userland/snort/pfring-daq-module/daq_pfring.la $RPM_BUILD_ROOT/usr/local/lib/daq
 #cp $HOME/PF_RING/userland/snort/pfring-daq-module/.libs/daq_pfring.so $RPM_BUILD_ROOT/usr/local/lib/daq
 #cp $HOME/PF_RING/userland/snort/pfring-daq-module-zc/daq_pfring_zc.la $RPM_BUILD_ROOT/usr/local/lib/daq
@@ -81,6 +99,19 @@ mkdir -p $RPM_BUILD_ROOT/usr/local/lib/daq
 #cp $HOME/PF_RING/userland/examples_zc/zcount $RPM_BUILD_ROOT/usr/bin
 #cp $HOME/PF_RING/userland/examples_zc/zcount_ipc $RPM_BUILD_ROOT/usr/bin
 #%endif
+
+#Kernel Modules (just ixgbe)
+mkdir -p $RPM_BUILD_ROOT/usr/local/pfring/drivers/intel/ixgbe/ixgbe-4.1.5-zc/src/
+
+cp $HOME/PF_RING/drivers/intel/ixgbe/ixgbe-4.1.5-zc/src/ixgbe.ko $RPM_BUILD_ROOT/usr/local/pfring/drivers/intel/ixgbe/ixgbe-4.1.5-zc/src/
+cp $HOME/PF_RING/drivers/intel/ixgbe/ixgbe-4.1.5-zc/src/load_driver.sh $RPM_BUILD_ROOT/usr/local/pfring/drivers/intel/ixgbe/ixgbe-4.1.5-zc/src/
+
+mkdir -p $RPM_BUILD_ROOT/usr/local/pfring/drivers/intel/ixgbe/ixgbe-4.1.5-zc/scripts
+cp $HOME/PF_RING/drivers/intel/ixgbe/ixgbe-4.1.5-zc/scripts/set_irq_affinity $RPM_BUILD_ROOT/usr/local/pfring/drivers/intel/ixgbe/ixgbe-4.1.5-zc/scripts/
+
+mkdir -p $RPM_BUILD_ROOT/usr/local/pfring/kernel
+cp $HOME/PF_RING/kernel/pf_ring.ko $RPM_BUILD_ROOT/usr/local/pfring/kernel
+
 
 
 # Clean out our build directory
@@ -119,7 +150,31 @@ rm -fr $RPM_BUILD_ROOT
 /etc/init.d/cluster
 /etc/init/pf_ring.conf
 /etc/ld.so.conf.d/pf_ring.conf
+
+
+
+
+/usr/local/pfring/drivers/intel/ixgbe/ixgbe-4.1.5-zc/src/ixgbe.ko
+/usr/local/pfring/drivers/intel/ixgbe/ixgbe-4.1.5-zc/src/load_driver.sh
+/usr/local/pfring/drivers/intel/ixgbe/ixgbe-4.1.5-zc/scripts/set_irq_affinity
+/usr/local/pfring/kernel/pf_ring.ko
+
+
+
+
 /usr/local/include/pcap-int.h
+
+/usr/local/include/pcap/bluetooth.h
+/usr/local/include/pcap/bpf.h
+/usr/local/include/pcap/ipnet.h
+/usr/local/include/pcap/namedb.h
+/usr/local/include/pcap/nflog.h
+/usr/local/include/pcap/pcap.h
+/usr/local/include/pcap/sll.h
+/usr/local/include/pcap/usb.h
+/usr/local/include/pcap/vlan.h
+
+
 @ACCOLADE_LIBS@
 @NAPATECH_LIBS@
 @MYRICOM_LIBS@
@@ -162,6 +217,15 @@ case "$1" in
     /etc/init.d/pf_ring start
   ;;
 esac
+
+ln -f -s /usr/local/lib/libpcap.so.1.7.4 /usr/local/lib/libpcap.so
+/sbin/ldconfig
+
+
+%postun
+rm -f /usr/local/lib/libpcap.so
+/sbin/ldconfig
+
 
 %preun
 case "$1" in
